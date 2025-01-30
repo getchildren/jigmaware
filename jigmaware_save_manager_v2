@@ -1,7 +1,7 @@
 local httpService = game:GetService('HttpService')
 
 local SaveManager = {} do
-	SaveManager.Folder = 'jigmaware/settings'
+	SaveManager.Folder = 'jigmaware'
 	SaveManager.Ignore = {}
 	SaveManager.Parser = {
 		Toggle = {
@@ -76,6 +76,18 @@ local SaveManager = {} do
 	function SaveManager:SetFolder(folder)
 		self.Folder = folder;
 		self:BuildFolderTree()
+	end
+
+	function SaveManager:Delete(name)
+	    if not name then
+	        return false, 'no config file selected'
+	    end
+	    local fullPath = self.Folder .. '/settings/' .. name .. '.json'
+	    if isfile(fullPath) then
+	        delfile(fullPath)
+	        return true
+	    end
+	    return false, 'config does not exist'
 	end
 
 	function SaveManager:Save(name)
@@ -233,6 +245,20 @@ local SaveManager = {} do
 			end
 
 			self.Library:Notify(string.format('loaded config %q', name))
+		end)
+
+		section:AddButton('delete config', function()
+			local name = Options.SaveManager_ConfigList.Value
+
+			local success, err = self:Delete(name)
+			if not success then
+				return self.Library:Notify('failed to delete config: ' .. err)
+			end
+
+			self.Library:Notify(string.format('deleted config %q', name))
+
+			Options.SaveManager_ConfigList:SetValues(self:RefreshConfigList())
+			Options.SaveManager_ConfigList:SetValue(nil)
 		end)
 
 		section:AddButton('overwrite config', function()
