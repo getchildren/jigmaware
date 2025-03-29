@@ -22,7 +22,7 @@ local ThemeManager = {} do
   	['ocean'] 			= { 15, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1a1a2e","AccentColor":"00bcd4","BackgroundColor":"0f0f1a","OutlineColor":"2d2d44"}') },
   	['synthwave'] 		= { 16, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"1e1e2e","AccentColor":"ff7edb","BackgroundColor":"161622","OutlineColor":"2a2a3a"}') },
   	['matrix'] 			= { 17, httpService:JSONDecode('{"FontColor":"00ff00","MainColor":"000000","AccentColor":"00ff00","BackgroundColor":"000000","OutlineColor":"00ff00"}') },
-        ['russia']              = { 17, httpService:JSONDecode('{"FontColor":"ffcc00","MainColor":"ff0000","AccentColor":"ffffff","BackgroundColor":"000000","OutlineColor":"ffffff"}') },
+        ['russia'] = { 18, httpService:JSONDecode('{"FontColor":"ffb3b3","MainColor":"b3c7ff","AccentColor":"ffffff","BackgroundColor":"f0f0f0","OutlineColor":"d1d1d1"}') },
   }
 
 	function ThemeManager:ApplyTheme(theme)
