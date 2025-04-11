@@ -1010,7 +1010,7 @@ do
         local KeyPicker = {
             Value = Info.Default;
             Toggled = false;
-            Mode = Info.Mode or 'Toggle'; -- Always, Toggle, Hold
+            Mode = Info.Mode or 'toggle'; -- Always, Toggle, Hold
             Type = 'KeyPicker';
             Callback = Info.Callback or function(Value) end;
             ChangedCallback = Info.ChangedCallback or function(New) end;
@@ -1019,8 +1019,8 @@ do
         };
 
         if KeyPicker.SyncToggleState then
-            Info.Modes = { 'Toggle' }
-            Info.Mode = 'Toggle'
+            Info.Modes = { 'toggle' }
+            Info.Mode = 'toggle'
         end
 
         local PickOuter = Library:Create('Frame', {
@@ -2641,7 +2641,7 @@ do
                 local Elem = Dependency[1];
                 local Value = Dependency[2];
 
-                if Elem.Type == 'Toggle' and Elem.Value ~= Value then
+                if Elem.Type == 'toggle' and Elem.Value ~= Value then
                     Holder.Visible = false;
                     Depbox:Resize();
                     return;
