@@ -320,6 +320,61 @@ function DrawingLib.new(drawing_type)
             end,
             __tostring = function() return "Drawing" end
         })
+    elseif drawing_type == "Image" then
+        local image_obj = ({
+            Size = Vector2.zero,
+            Position = Vector2.zero,
+            Data = "",
+            Transparency = 0,
+            Roundness = 0,
+            Filled = true
+        } + base_drawing_obj)
+    
+        local image_frame, ui_corner = Instance.new("ImageLabel"), Instance.new("UICorner")
+        image_frame.Name = drawing_index
+        image_frame.BorderSizePixel = 0
+        image_frame.BackgroundTransparency = 1
+        image_frame.ZIndex = image_obj.ZIndex
+        image_frame.Visible = image_obj.Visible
+        image_frame.ImageTransparency = convert_transparency(image_obj.Transparency)
+        
+        ui_corner.CornerRadius = UDim.new(0, image_obj.Roundness)
+        ui_corner.Parent = image_frame
+        image_frame.Parent = drawing_ui
+    
+        return setmetatable({}, {
+            __newindex = function(_, index, value)
+                if image_obj[index] == nil then return end
+                if index == "Size" then
+                    image_frame.Size = UDim2.fromOffset(value.X, value.Y)
+                elseif index == "Position" then
+                    image_frame.Position = UDim2.fromOffset(value.X, value.Y)
+                elseif index == "Data" then
+                    image_frame.Image = value
+                elseif index == "Transparency" then
+                    image_frame.ImageTransparency = convert_transparency(value)
+                elseif index == "Roundness" then
+                    ui_corner.CornerRadius = UDim.new(0, value)
+                elseif index == "Visible" then
+                    image_frame.Visible = value
+                elseif index == "ZIndex" then
+                    image_frame.ZIndex = value
+                elseif index == "Color" then
+                    image_frame.ImageColor3 = value
+                end
+                image_obj[index] = value
+            end,
+            __index = function(self, index)
+                if index == "Remove" or index == "Destroy" then
+                    return function()
+                        image_frame:Destroy()
+                        image_obj:Remove()
+                    end
+                end
+                return image_obj[index]
+            end,
+            __tostring = function() return "Drawing" end
+        })
     elseif drawing_type == "GradientFill" then
         local gradient_obj = ({
             Size = Vector2.zero,
