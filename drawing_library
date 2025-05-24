@@ -32,7 +32,9 @@ local drawing_fonts_enum = {
     [0] = Font.fromEnum(Enum.Font.Roboto),
     [1] = Font.fromEnum(Enum.Font.Legacy),
     [2] = Font.fromEnum(Enum.Font.SourceSans),
-    [3] = Font.fromEnum(Enum.Font.RobotoMono)
+    [3] = Font.fromEnum(Enum.Font.RobotoMono),
+    [4] = Font.fromEnum(Enum.Font.Michroma),
+    [5] = Font.fromEnum(Enum.Font.Nunito)
 }
 
 local function get_font_from_index(font_index)
